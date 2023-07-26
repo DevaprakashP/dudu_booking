@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Button from "../../components/Button";
+import Layout from "../../layout/Layout";
 import { EditHotel } from "../../store/User";
 import { feedBack, pLace, timinG, tyPe } from "./Array";
-import Layout from "./Layout";
 
 export default function EditHotels() {
   const singleHotel = useSelector((state) => state.counter.singleHotel);
+  const location = useLocation();
+  const authData = location.state.authData;
   const [hotelImg, sethotelImg] = useState("");
   const [hotelImg1, sethotelImg1] = useState("");
   const [hotelImg2, sethotelImg2] = useState("");
@@ -125,7 +128,11 @@ export default function EditHotels() {
   };
 
   return (
-    <Layout>
+    <Layout
+      customClass={"flex w-[100%] h-[85vh]"}
+      userData={authData}
+      customTopbar={"h-[300px]"}
+    >
       <div className="w-[50%]  bg-[pink] flex-col flex  items-center gap-2 p-2 ">
         <div className="text-center ">hotel info </div>
         <div className="w-[100%]  flex-col flex  items-center gap-2 p-2 overflow-y-scroll">

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 import Button from "../../components/Button";
+import Layout from "../../layout/Layout";
 import { API } from "../../store/Api";
 import { feedBack, pLace, timinG, tyPe } from "./Array";
-import Layout from "./Layout";
 
 export default function AddHotelsPage() {
   const [hotelImg, sethotelImg] = useState("");
   const [hotelImg1, sethotelImg1] = useState("");
   const [hotelImg2, sethotelImg2] = useState("");
-
+  const location = useLocation();
+  const authData = location.state.authData;
   const [inputDatas, setinputDatas] = useState({
     title: "",
     place: "",
@@ -154,7 +156,11 @@ export default function AddHotelsPage() {
   };
 
   return (
-    <Layout>
+    <Layout
+      customClass={"flex w-[100%] h-[85vh]"}
+      userData={authData}
+      customTopbar={"h-[300px]"}
+    >
       <div className="w-[50%]  bg-[pink] flex-col flex  items-center gap-2 p-2 ">
         <div className="text-center ">hotel info </div>
         <div className="w-[100%]  flex-col flex  items-center gap-2 p-2 overflow-y-scroll">

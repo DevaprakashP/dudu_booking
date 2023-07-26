@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import App from "../App";
+import { AUTH } from "../store/Api";
 import Admin from "./admin/Admin";
 
 export default function UserDetails() {
   const [userData, setuserData] = useState("");
   const [admin, setadmin] = useState(false);
   const userInfo = async () => {
-    await fetch("http://localhost:4000/api/auth/userData", {
+    await fetch(AUTH + "/userData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

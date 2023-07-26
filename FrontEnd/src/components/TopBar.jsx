@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { createUser, loginUser } from "../store/User";
+import { classNames } from "../utils/ClassNames";
 import Button from "./Button";
 import Login from "./Login";
 import ModalCompnt from "./ModalCompnt";
 import SignUp from "./SignUp";
 import Text from "./Text";
 
-export default function TopBar({ userData }) {
+export default function TopBar({ userData, customClass }) {
   const [changeAuth, setchangeAuth] = useState(false);
+
   const [open, setopen] = useState(false);
   const [inputDatas, setinputDatas] = useState({
     Username: "",
@@ -60,12 +62,17 @@ export default function TopBar({ userData }) {
     }
   };
   return (
-    <div className="w-[100%] h-[300px] bg-[#e6e6fa] flex-col flex items-center gap-2">
+    <div
+      className={classNames(
+        customClass ? customClass : " h-[300px] ",
+        "w-[100%] bg-[#e6e6fa] flex-col flex items-center gap-2"
+      )}
+    >
       <div className=" w-[81%] h-[100%] flex-col flex items-center gap-10">
         <div className="w-[98%] h-[80px] flex items-center justify-between p-2">
           <Text
             name={"DuDu Booking"}
-            customClass={"text-[white] font-bold text-[40px]"}
+            customClass={"text-[black] font-bold text-[40px]"}
           />
           <div className=" h-[100%] flex items-center justify-between gap-2">
             <ModalCompnt
@@ -89,6 +96,7 @@ export default function TopBar({ userData }) {
                   />
                 )}
               </div>
+
               <div className="realtive w-[50%] h-[100%] flex-col flex items-center justify-center bg-[#003580] gap-4 rounded-r-xl">
                 <Text
                   name={"Hello, Friend!"}

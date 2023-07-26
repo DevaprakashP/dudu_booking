@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Text from "../../components/Text";
-import Layout from "./Layout";
 import { FcDepartment } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { FcNext } from "react-icons/fc";
@@ -20,6 +19,7 @@ import { deleteHotel, deleteUser, EditHotel } from "../../store/User";
 import { API, AUTH } from "../../store/Api";
 import EditIcon from "../../components/EditIcon";
 import DeleteIcon from "../../components/DeleteIcon";
+import Layout from "../../layout/Layout";
 
 export default function Admin({ authData }) {
   const [page, setpage] = useState("");
@@ -111,8 +111,12 @@ export default function Admin({ authData }) {
   };
   console.log("ReservedHotelData", reserved);
   return (
-    <Layout userData={authData}>
-      <div className="w-[50%] h-[100%]  bg-[pink] flex-col flex  items-center gap-2 p-2 ">
+    <Layout
+      customClass={"flex w-[100%] h-[85vh]"}
+      userData={authData}
+      customTopbar={"h-[300px]"}
+    >
+      <div className="w-[50%] h-[100%]  flex-col flex  items-center gap-2 p-2 ">
         <h1>ADMIN</h1>
 
         <div className="w-[100%] cursor-pointer flex-col flex  items-center gap-2 p-2  ">
@@ -136,7 +140,9 @@ export default function Admin({ authData }) {
           </div>
           <div
             onClick={() => {
-              navigate("/addhotelspage");
+              navigate("/addhotelspage", {
+                state: authData,
+              });
             }}
             className="transistion-all text-white hover:text-black hover:bg-[#f1f2f469] w-[80%] h-[80px] flex items-center gap-2 justify-center shadow bg-[#00000064] rounded-md"
           >
@@ -158,7 +164,7 @@ export default function Admin({ authData }) {
         </div>
       </div>
 
-      <div className="w-[50%] bg-[pink]  h-[100%] overflow-y-scroll">
+      <div className="container-snap  w-[50%]  h-[100%] overflow-y-scroll">
         {"users" === page ? (
           <div className="w-[100%]  items-center flex-col flex gap-2 p-2 ">
             {users?.map((i) => (
@@ -288,7 +294,9 @@ export default function Admin({ authData }) {
               <div className="flex items-center gap-6 justify-center">
                 <EditIcon
                   onClick={() => {
-                    navigate("/editHotels");
+                    navigate("/editHotels", {
+                      state: authData,
+                    });
                     dispatch(getHotelById(id));
                   }}
                 />
